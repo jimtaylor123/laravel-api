@@ -5,6 +5,8 @@ The aim of this project is to create a boiler plate Laravel API
 ## Done
 * UUIDs for all models ✅
 
+## Doing
+* Laravel cashier and stripe for payments
 ## To do
 * Basic model set up
 * Json API spec compliant
@@ -29,7 +31,6 @@ The aim of this project is to create a boiler plate Laravel API
 * Logging with papertrail
 * Custom exceptions
 * Multiple db connections - sql and nosql
-* Laravel cashier and stripe for payments
   
 
 We will use the following example task app as our basis:
