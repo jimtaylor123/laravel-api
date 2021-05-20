@@ -15,8 +15,6 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
 
-    'version' => env('APP_VERSION', '1.0.0'),
-
     /*
     |--------------------------------------------------------------------------
     | Application Environment
@@ -127,6 +125,22 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Custom
+    |--------------------------------------------------------------------------
+    |
+    | Non standard Laravel values set for this project
+    |
+    */
+
+    'version' => env('APP_VERSION', '1.0.0'),
+    'test_user' => [
+            'email' => env('TEST_USER_EMAIL', 'me@example.com'),
+            'first_name' => env('TEST_USER_FIRST_NAME', 'John'),
+            'last_name' => env('TEST_USER_LAST_NAME', 'Bull'),
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Autoloaded Service Providers
     |--------------------------------------------------------------------------
     |
@@ -163,10 +177,6 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-
-        /*
-         * Package Service Providers...
-         */
 
         /*
          * Application Service Providers...
