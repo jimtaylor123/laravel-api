@@ -13,7 +13,7 @@ class CreateCustomerColumns extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
+        Schema::table('accounts', function (Blueprint $table) {
             $table->charset = 'utf8';
             $table->collation = 'utf8_bin';
             $table->string('stripe_id')->nullable()->index();
@@ -30,7 +30,7 @@ class CreateCustomerColumns extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
+        Schema::table('accounts', function (Blueprint $table) {
             $table->dropColumn([
                 'stripe_id',
                 'card_brand',

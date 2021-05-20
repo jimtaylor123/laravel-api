@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
                 PassportSeeder::class,
                 UserSeeder::class,
                 ProjectSeeder::class,
+                AccountSeeder::class,
             ]);
         }
         
