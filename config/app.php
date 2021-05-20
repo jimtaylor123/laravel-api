@@ -134,9 +134,12 @@ return [
 
     'version' => env('APP_VERSION', '1.0.0'),
     'test_user' => [
-            'email' => env('TEST_USER_EMAIL', 'me@example.com'),
-            'first_name' => env('TEST_USER_FIRST_NAME', 'John'),
-            'last_name' => env('TEST_USER_LAST_NAME', 'Bull'),
+        'email' => env('TEST_USER_EMAIL', 'me@example.com'),
+        'first_name' => env('TEST_USER_FIRST_NAME', 'John'),
+        'last_name' => env('TEST_USER_LAST_NAME', 'Bull'),
+    ],
+    'factory' => [
+        'default_quantity' => env('FACTORY_QUANTITY', 50)
     ],
 
     /*

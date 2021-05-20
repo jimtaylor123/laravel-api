@@ -12,8 +12,9 @@ class DatabaseSeeder extends Seeder
     {
         if(App::environment('local')){
             $this->call([
+                PassportSeeder::class,
                 UserSeeder::class,
-                PassportSeeder::class
+                ProjectSeeder::class,
             ]);
         }
         

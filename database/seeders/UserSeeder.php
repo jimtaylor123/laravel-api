@@ -17,7 +17,8 @@ class UserSeeder extends Seeder
             'last_name' => config('app.test_user.last_name'),
         ]);
 
-        // Create several users for each role
-        User::factory(100)->create();
+        User::factory(
+            config('app.factory.default_quantity')
+          )->create();
     }
 }
