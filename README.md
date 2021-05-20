@@ -2,8 +2,12 @@
 
 The aim of this project is to create a boiler plate Laravel API
 
+## Done
+* UUIDs for all models ✅
+
+## To do
+* Basic model set up
 * Json API spec compliant
-* UUIDs for all models
 * Generic controller methods for common crud actions
 * Generator for quickly creating crud models
 * Generation by YAML?
