@@ -19,4 +19,9 @@ class Project extends Model
     {
         return $this->belongsTo (User::class, 'owner_id');
     }
+
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable');
+    }
 }

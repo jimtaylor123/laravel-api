@@ -15,7 +15,11 @@ class DatabaseSeeder extends Seeder
                 PassportSeeder::class,
                 UserSeeder::class,
                 ProjectSeeder::class,
+                AccountTypeSeeder::class,
                 AccountSeeder::class,
+                TaskSeeder::class,
+                TeamSeeder::class,
+                CommentSeeder::class,
             ]);
         }
         

@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
+use App\Models\Team;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use GoldSpecDigital\LaravelEloquentUUID\Foundation\Auth\User as Authenticatable;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class User extends Authenticatable
 {
@@ -37,5 +39,10 @@ class User extends Authenticatable
     public function accounts(): HasOne
     {
         return $this->hasOne(Account::class, 'owner_id');
+    }
+
+    public function teams(): HasManyThrough
+    {
+        return $this->hasManyThrough(Team::class, User::class);
     }
 }

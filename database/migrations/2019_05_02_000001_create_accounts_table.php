@@ -11,8 +11,13 @@ class CreateAccountsTable extends Migration
         Schema::create('accounts', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('name');
+
             $table->uuid('owner_id');
             $table->foreign('owner_id')->references('id')->on('users');
+
+            $table->uuid('account_type_id');
+            $table->foreign('account_type_id')->references('id')->on('account_types');
+            
             $table->timestamps();
         });
     }

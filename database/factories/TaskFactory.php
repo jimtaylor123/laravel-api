@@ -2,24 +2,25 @@
 
 namespace Database\Factories;
 
+use App\Models\Task;
 use App\Models\User;
-use App\Models\Account;
-use App\Models\AccountType;
+use App\Models\Project;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class AccountFactory extends Factory
+class TaskFactory extends Factory
 {
     /**
      * @var string $model
      */
-    protected $model = Account::class;
+    protected $model = Task::class;
 
     public function definition(): array
     {
         return [
-            'name' => $this->faker->text(10),
+            'title' => $this->faker->text(10),
+            'description' => $this->faker->text(100),
+            'project_id' => Project::inRandomOrder()->first()->id,
             'owner_id' => User::inRandomOrder()->first()->id,
-            'account_type_id' => AccountType::inRandomOrder()->first()->id
         ];
     }
 }
