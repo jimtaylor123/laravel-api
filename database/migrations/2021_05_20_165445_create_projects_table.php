@@ -13,6 +13,8 @@ class CreateProjectsTable extends Migration
             $table->string('name');
             $table->uuid('owner_id');
             $table->foreign('owner_id')->references('id')->on('users');
+            $table->uuid('account_id');
+            $table->foreign('account_id')->references('id')->on('accounts');
             $table->timestamps();
         });
     }

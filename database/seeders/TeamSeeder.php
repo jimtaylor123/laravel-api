@@ -11,6 +11,7 @@ class TeamSeeder extends Seeder
     {
         Team::factory(
             config('app.factory.default_quantity')
-        )->create();
+        )->hasUsers(5)
+        ->create();
     }
 }

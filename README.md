@@ -4,13 +4,13 @@ The aim of this project is to create a boiler plate Laravel API
 
 ## Done
 * UUIDs for all models ✅
-* Laravel cashier and stripe for payments - basic
+* Laravel cashier and stripe for payments - basic ✅
+* Basic model set up ✅
 
 ## Doing
-* Basic model set up
+* Controllers, form requests, services, resources and Json API spec compliant
 
 ## To do
-* Json API spec compliant
 * React front end in separate tri repo project
 * Generic controller methods for common crud actions
 * Generator for quickly creating crud models

@@ -2,13 +2,18 @@
 
 namespace App\Models;
 
+use App\Models\User;
+use App\Models\Comment;
+use App\Models\Project;
+use App\Traits\HasType;
+use App\Traits\HasAllowedAttributes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use GoldSpecDigital\LaravelEloquentUUID\Database\Eloquent\Model;
 
 class Task extends Model
 {
-    use HasFactory;
+    use HasFactory, HasAllowedAttributes, HasType; 
 
     protected $fillable = [
         'title',
