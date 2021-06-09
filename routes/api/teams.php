@@ -7,7 +7,7 @@ use App\Http\Controllers\v1\User\Projects\UserProjectRelationController;
 
 Route::apiResource('/', UserController::class);
 
-Route::prefix('/{userId}')->group(function () {
+Route::prefix('/{user}')->group(function () {
     Route::prefix('/relationships')->group(function () {
         Route::prefix('/projects')->group(function () {
             Route::get('/', [UserProjectRelationController::class, 'index'])->name('users.relationships.projects');

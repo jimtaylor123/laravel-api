@@ -15,9 +15,7 @@ return [
                 'comments',
                 'projects',
             ],
-            'allowedFilters' => [
-                // new FiltersExact('role'),
-            ],
+            'allowedFilters' => [],
             'validationRules'=> [
                 'create' => [
                     'data.attributes.first_name' => 'required|string',
