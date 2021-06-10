@@ -21,10 +21,10 @@ Route::get('/', [AppController::class, 'version']);
 Route::middleware('auth:api')->prefix('v1')->group(function(){
     require(__DIR__ . '/api/users.php');
     require(__DIR__ . '/api/me.php');
-    require(__DIR__ . '/api/account_types.php');
-    require(__DIR__ . '/api/accounts.php');
-    require(__DIR__ . '/api/teams.php');
-    require(__DIR__ . '/api/projects.php');
-    require(__DIR__ . '/api/tasks.php');
-    require(__DIR__ . '/api/comments.php');
+    // require(__DIR__ . '/api/account_types.php');
+    // require(__DIR__ . '/api/accounts.php');
+    // require(__DIR__ . '/api/teams.php');
+    // require(__DIR__ . '/api/projects.php');
+    // require(__DIR__ . '/api/tasks.php');
+    // require(__DIR__ . '/api/comments.php');
 });

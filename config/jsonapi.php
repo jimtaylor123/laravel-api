@@ -34,7 +34,13 @@ return [
                 [
                     'type' => 'projects',
                     'method' => 'projects',
-                ]
+                    'nature' => 'hasMany',
+                ],
+                [
+                    'type' => 'comments',
+                    'method' => 'comments',
+                    'nature' => 'hasMany',
+                ],
             ]
         ],
     ],

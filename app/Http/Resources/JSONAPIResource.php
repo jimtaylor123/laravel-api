@@ -31,17 +31,24 @@ class JSONAPIResource extends JsonResource
             $relatedType = $related['type'];
             $relationship = $related['method'];
             $modelName = Str::singular($this->type());
+            
             return [
                 $relatedType => [
                     'links' => [
                         'self'    => route(
-                            "{$this->type()}.relationships.{$relatedType}",
-                            [$modelName => $this->id]
+                            "{$this->type()}.relationships",
+                            [
+                                $modelName.'Uuid' => $this->id,
+                                'relationship' => $relatedType
+                            ]
                             
                         ),
                         'related' => route(
-                            "{$this->type()}.{$relatedType}",
-                            [$modelName => $this->id]
+                            "{$this->type()}.related",
+                            [
+                                $modelName.'Uuid' => $this->id,
+                                'relationship' => $relatedType
+                            ]
                         ),
                     ],
                     'data' => $this->prepareRelationshipData($relatedType, $relationship),

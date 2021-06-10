@@ -1,24 +1,28 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\v1\User\UserController;
-use App\Http\Controllers\v1\User\Projects\UserProjectController;
-use App\Http\Controllers\v1\User\Projects\UserProjectRelationController;
+use App\Http\Controllers\v1\team\TeamController;
+use App\Http\Controllers\v1\team\TeamRelatedController;
 
-Route::apiResource('/', UserController::class);
+Route::apiResource('teams', TeamController::class);
 
-Route::prefix('/{user}')->group(function () {
-    Route::prefix('/relationships')->group(function () {
-        Route::prefix('/projects')->group(function () {
-            Route::get('/', [UserProjectRelationController::class, 'index'])->name('users.relationships.projects');
-            Route::patch('/', [UserProjectRelationController::class, 'update'])->name('users.relationships.projects');
+Route::prefix('teams')->group(function(){
+
+    // Route::get('relationships', [TeamRelatedController::class, 'indexRelationships']);
+
+    Route::prefix('/{teamUuid}')->group(function () {
+
+         // Get and manage model relationships
+         Route::prefix('/relationships')->group(function () {
+            Route::prefix('{relationship}')->group(function () {
+                Route::get('/', [TeamRelatedController::class, 'showResourceRelationships'])->name('teams.relationships');
+                Route::patch('/', [TeamRelatedController::class, 'updateResourceRelationships'])->name('teams.relationships');
+            });
         });
-        Route::prefix('/comments')->group(function () {
-            Route::get('/', [UserCommentRelationController::class, 'index'])->name('users.relationships.comments');
-            Route::patch('/', [UserCommentRelationController::class, 'update'])->name('users.relationships.comments');
-        });
+
+
+        // View related models
+        Route::get('{relationship}', [TeamRelatedController::class, 'indexRelatedResources'])->name('teams.related');
+
     });
-
-    Route::get('/projects', [UserProjectController::class, 'index'])->name('users.projects');
-    Route::get('/comments', [UserCommentController::class, 'index'])->name('users.comments');
 });

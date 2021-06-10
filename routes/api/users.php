@@ -8,18 +8,21 @@ Route::apiResource('users', UserController::class);
 
 Route::prefix('users')->group(function(){
 
+    // Route::get('relationships', [UserRelatedController::class, 'indexRelationships']);
+
     Route::prefix('/{userUuid}')->group(function () {
 
          // Get and manage model relationships
          Route::prefix('/relationships')->group(function () {
             Route::prefix('{relationship}')->group(function () {
-                Route::get('/', [UserRelatedController::class, 'showRelationships'])->name('users.relationships.projects');
-                Route::patch('/', [UserRelatedController::class, 'updateRelationships'])->name('users.relationships.projects');
+                Route::get('/', [UserRelatedController::class, 'showResourceRelationships'])->name('users.relationships');
+                Route::patch('/', [UserRelatedController::class, 'updateResourceRelationships'])->name('users.relationships');
             });
         });
 
+
         // View related models
-        Route::get('{relationship}', [UserRelatedController::class, 'indexRelated'])->name('users.projects');
+        Route::get('{relationship}', [UserRelatedController::class, 'indexRelatedResources'])->name('users.related');
 
     });
 });

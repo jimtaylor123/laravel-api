@@ -4,13 +4,13 @@ namespace App\Http\Controllers\v1\User;
 
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\JSONAPIController;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\JSONAPIRequest;
 use App\Http\Resources\JSONAPIResource;
 use App\Services\JSONAPIResourceService;
 
-class UserController extends Controller
+class UserController extends JSONAPIController
 {
     public string $class;
 

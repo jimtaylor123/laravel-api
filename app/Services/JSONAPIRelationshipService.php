@@ -9,6 +9,7 @@ use App\Http\Resources\JSONAPICollection;
 use App\Http\Resources\JSONAPIIdentifierResource;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class JSONAPIRelationshipService
 {
@@ -16,7 +17,7 @@ class JSONAPIRelationshipService
         string $modelClass,
         string $uuid,
         string $relationship
-    ): JSONAPIIdentifierResource {
+    ): JSONAPIIdentifierResource | AnonymousResourceCollection {
         
         $model = $modelClass::findOrFail($uuid);
 
@@ -85,9 +86,13 @@ class JSONAPIRelationshipService
     }
 
     public function fetchRelated(
-        $model, 
-        $relationship
+        string $modelClass, 
+        string $uuid,
+        string $relationship
     ): JSONAPIResource | JSONAPICollection {
+
+        $model = $modelClass::findOrFail($uuid);
+        
         if ($model->$relationship instanceof Model) {
             return new JSONAPIResource($model->$relationship);
         }

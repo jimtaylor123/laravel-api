@@ -2,8 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\v1\Me\MeController;
-use App\Http\Controllers\v1\User\UserController;
-use App\Http\Controllers\v1\User\Projects\UserProjectController;
-use App\Http\Controllers\v1\User\Projects\UserProjectRelationController;
 
-Route::apiResource('/', MeController::class)->only(['show', 'update']);
+Route::get('me', [MeController::class, 'show']);
+Route::patch('me', [MeController::class, 'update']);
