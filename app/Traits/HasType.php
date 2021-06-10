@@ -7,7 +7,7 @@ use Illuminate\Support\Str;
 Trait HasType {
 
     public function type($name=null): string {
-        return Str::plural($name?? class_basename($this));
+        return Str::lower(Str::plural($name?? class_basename($this)));
     }
     
 }

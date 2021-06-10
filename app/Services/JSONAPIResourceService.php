@@ -60,7 +60,7 @@ class JSONAPIResourceService
         return (new JSONAPIResource($model))
             ->response()
             ->header('Location', route("{$model->type()}.show", [
-                Str::singular($model->type()) => $model,
+                Str::singular($model->type()) => $model->id,
             ]));
     }
 

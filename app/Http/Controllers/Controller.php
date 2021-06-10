@@ -17,7 +17,7 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    private JSONAPIResourceService $resourceService;
+    protected JSONAPIResourceService $resourceService;
     public string $class;
 
     public function __construct(JSONAPIResourceService $resourceService)
@@ -35,24 +35,32 @@ class Controller extends BaseController
     {
         return $this->resourceService->createResource(
             $this->class, 
-            $request->validated()
+            $request->input('data.attributes'),
         );
     }
 
     public function show(string $uuid): JSONAPIResource
     {
-        return $this->resourceService->fetchResource($this->class, $uuid);
+        return $this->resourceService->fetchResource(
+            $this->class, 
+            $uuid
+        );
     }
 
     public function update(JSONAPIRequest $request, string $uuid): JSONAPIResource
     {
-        $attributes = $request->input('data.attributes');
-
-        return $this->resourceService->updateResource($this->class, $uuid, $attributes);
+        return $this->resourceService->updateResource(
+            $this->class, 
+            $uuid, 
+            $request->input('data.attributes')
+        );
     }
 
     public function destroy(string $uuid): Response
     {
-        return $this->resourceService->deleteResource($this->class, $uuid);
+        return $this->resourceService->deleteResource(
+            $this->class, 
+            $uuid
+        );
     }
 }

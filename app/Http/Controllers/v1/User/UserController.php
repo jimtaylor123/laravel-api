@@ -22,24 +22,28 @@ class UserController extends Controller
 
     public function store(JSONAPIRequest $request): JsonResponse
     {
-        return $this->service->createResource(
+        $attributes = $request->input('data.attributes');
+        $attributes['password'] = Hash::make($attributes['password']);
+
+        return $this->resourceService->createResource(
             $this->class, 
-            array_merge(
-                $request->validated(), 
-                [
-                    'password' => Hash::make($request->input('data.attributes.password'))
-                ]
-            )
+            $attributes
         );
+    }
+
+    public function show(string $uuid): JSONAPIResource
+    {
+        return $this->resourceService->fetchResource($this->class, $uuid);
     }
 
     public function update(JSONAPIRequest $request, string $uuid): JSONAPIResource
     {
         $attributes = $request->input('data.attributes');
+
         if(isset($attributes['password'])){
             $attributes['password'] = Hash::make($attributes['password']);
         }
 
-        return $this->service->updateResource($this->class, $uuid, $attributes);
+        return $this->resourceService->updateResource($this->class, $uuid, $attributes);
     }
 }
