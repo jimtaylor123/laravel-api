@@ -12,7 +12,7 @@ class CreateAccountsTable extends Migration
             $table->uuid('id')->primary();
             $table->string('name');
 
-            $table->uuid('owner_id');
+            $table->uuid('owner_id')->nullable();
             $table->foreign('owner_id')->references('id')->on('users');
 
             $table->uuid('account_type_id');

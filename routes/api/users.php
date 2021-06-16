@@ -8,8 +8,6 @@ Route::apiResource('users', UserController::class);
 
 Route::prefix('users')->group(function(){
 
-    // Route::get('relationships', [UserRelatedController::class, 'indexRelationships']);
-
     Route::prefix('/{userUuid}')->group(function () {
 
          // Get and manage model relationships
@@ -19,7 +17,6 @@ Route::prefix('users')->group(function(){
                 Route::patch('/', [UserRelatedController::class, 'updateResourceRelationships'])->name('users.relationships');
             });
         });
-
 
         // View related models
         Route::get('{relationship}', [UserRelatedController::class, 'indexRelatedResources'])->name('users.related');

@@ -7,6 +7,7 @@ use App\Models\Team;
 use App\Models\Comment;
 use App\Models\Project;
 use App\Traits\HasType;
+use App\Traits\HasRelationships;
 use Laravel\Passport\HasApiTokens;
 use App\Traits\HasAllowedAttributes;
 use Illuminate\Notifications\Notifiable;
@@ -18,7 +19,7 @@ use GoldSpecDigital\LaravelEloquentUUID\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, HasAllowedAttributes, HasType;
+    use HasApiTokens, HasFactory, Notifiable, HasAllowedAttributes, HasType, HasRelationships;
 
     protected $fillable = [
         'first_name',

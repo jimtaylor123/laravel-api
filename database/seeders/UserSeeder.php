@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Models\Account;
 use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder
@@ -20,5 +21,10 @@ class UserSeeder extends Seeder
         User::factory(
             config('app.factory.default_quantity')
           )->create();
+
+        // Now that we have some users, we can assign some as owners of accounts for
+        foreach(Account::all() as $account){
+            $account->update(['owner_id' => $account->users()->inRandomOrder()->first()->id]);
+        }
     }
 }

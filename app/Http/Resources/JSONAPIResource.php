@@ -2,11 +2,13 @@
 
 namespace App\Http\Resources;
 
+use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Resources\MissingValue;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class JSONAPIResource extends JsonResource
 {
@@ -59,7 +61,11 @@ class JSONAPIResource extends JsonResource
         return $collection->count() > 0 ? $collection : new MissingValue();
     }
 
-    private function prepareRelationshipData($relatedType, $relationship){
+    private function prepareRelationshipData(
+        string $relatedType, 
+        string $relationship
+    ): MissingValue | JSONAPIIdentifierResource | AnonymousResourceCollection {
+
         if($this->whenLoaded($relationship) instanceof MissingValue){
             return new MissingValue();
         }

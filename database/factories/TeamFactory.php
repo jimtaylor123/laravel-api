@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Team;
+use App\Models\Account;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class TeamFactory extends Factory
@@ -16,6 +17,7 @@ class TeamFactory extends Factory
     {
         return [
             'name' => $this->faker->name,
+            'account_id' => Account::inRandomOrder()->first()->id
         ];
     }
 }

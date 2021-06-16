@@ -18,7 +18,7 @@ class CommentSeeder extends Seeder
 
         foreach($commentableType as $type){
 
-            $models = $type::inRandomOrder()->limit(5)->get();
+            $models = $type::inRandomOrder()->limit(10)->get();
 
             foreach($models as $model){
                 Comment::factory([
@@ -26,7 +26,7 @@ class CommentSeeder extends Seeder
                     'commentable_type' => get_class($model),
                 ])
                 ->count(
-                   rand(1,10)
+                    config('app.factory.default_quantity')/2
                 )->create();
             }
            

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\v1\User;
 
 use App\Models\User;
+use Illuminate\Support\Arr;
 use App\Services\JSONAPIService;
 use App\Http\Controllers\Controller;
 use App\Services\JSONAPIRelationshipService;
@@ -19,15 +20,6 @@ class UserRelatedController extends Controller
     {
         $this->service = $jsonAPIRelationshipService;
         $this->class = User::class;
-    }
-
-    public function indexRelationships(
-        string $uuid, 
-        string $relationship
-    ){
-        // $model = $this->class::findOrFail($uuid);
-
-        // return $this->service->fetchRelated($model, $relationship);
     }
 
     // Related models
@@ -56,11 +48,42 @@ class UserRelatedController extends Controller
     ){
         $model = $this->class::findOrFail($uuid);
 
-        // need to determine the type of relationship here - to one, to many or many to many
-        return $this->service->updateToManyRelationships(
+        $functionName = $this->getRelationshipFunctionName($model, $relationship, $request->input('data.*.id'));
+
+        return $this->service->$functionName(
             $model, 
-            'projects', 
+            $relationship, 
             $request->input('data.*.id')
         );
+    }
+
+    private function getRelationshipFunctionName($model, $relationship)
+    {
+        $relationshipDataArray = Arr::where($model->relationships(),  function($subArray, $key) use ($relationship) {
+            return  $subArray['type'] === $relationship;
+        });
+
+        if (! $relationshipDataArray) {
+            dd('whoops');
+
+            // TODO throw a proper execption
+        }
+
+        $data = array_shift($relationshipDataArray);
+
+        $relationMap = [
+            'hasOne' => 'updateToOneRelationship',
+            'hasMany' => 'updateToManyRelationships',
+            'belongsTo' => 'updateToOneRelationship',
+            'hasOneThrough' => 'updateToOneRelationship',
+            'hasManyThrougn' => 'updateToManyRelationships',
+            'belongsToMany' => 'updateToManyRelationships',
+            'morphTo' => 'updateToOneRelationship',
+            'morphToOne' => 'updateToOneRelationship',
+            'morphToMany' => 'updateToManyRelationships',
+            'morphedByMany' => 'updateToManyRelationships',
+        ];
+
+        return $functionName = $relationMap[$data['relationshipType']];
     }
 }

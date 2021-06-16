@@ -16,9 +16,13 @@ class AccountFactory extends Factory
 
     public function definition(): array
     {
+        // As accounts are created before users, 
+        // the owner_id is nullable until an owner is assigned
+        $user = User::inRandomOrder()->first();
+
         return [
             'name' => $this->faker->text(10),
-            'owner_id' => User::inRandomOrder()->first()->id,
+            'owner_id' => $user? $user->id : null,
             'account_type_id' => AccountType::inRandomOrder()->first()->id
         ];
     }

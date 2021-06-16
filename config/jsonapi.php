@@ -34,12 +34,12 @@ return [
                 [
                     'type' => 'projects',
                     'method' => 'projects',
-                    'nature' => 'hasMany',
+                    'relationshipType' => 'hasMany',
                 ],
                 [
                     'type' => 'comments',
                     'method' => 'comments',
-                    'nature' => 'hasMany',
+                    'relationshipType' => 'hasMany',
                 ],
             ]
         ],

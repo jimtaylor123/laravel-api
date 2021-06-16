@@ -10,7 +10,8 @@ class ProjectSeeder extends Seeder
 {
     public function run(): void
     {
-        $users = User::limit(10)->get();
+        // Seed 3 projects for half the users 
+        $users = User::limit(config('app.factory.default_quantity')/2)->get();
         
         foreach($users as $user){
             Project::factory(3)->create(['owner_id' => $user->id]);

@@ -29,19 +29,17 @@ class JSONAPIRelationshipService
     }
 
     public function updateToOneRelationship(
-        string $modelClass, 
-        string $uuid,
-        string $relationship
+        Model $model, 
+        string $relationship,
+        array $uuids,
     ): Response {
-
-        $model = $modelClass::findOrFail($uuid);
 
         $relatedModel = $model->$relationship()->getRelated();
 
         $model->$relationship()->dissociate();
 
-        if ($uuid) {
-            $newModel = $relatedModel->newQuery()->findOrFail($uuid);
+        if ($uuids) {
+            $newModel = $relatedModel->newQuery()->findOrFail($uuids[0]);
             $model->$relationship()->associate($newModel);
         }
 
@@ -50,26 +48,23 @@ class JSONAPIRelationshipService
     }
 
     public function updateToManyRelationships(
-        string $modelClass, 
-        int $modelUuid,
-        array $relatedUuids,
+        Model $model,
         string $relationship, 
+        array $uuids,
     ): Response {
-
-        $model = $modelClass::findOrFail($modelUuid);
 
         $foreignKey = $model->$relationship()->getForeignKeyName();
         $relatedModel = $model->$relationship()->getRelated();
-
-
-        $relatedModel->newQuery()->findOrFail($relatedUuids);
-
+        
+        dd($uuids);
+        $relatedModel->newQuery()->findOrFail($uuids);
+        dd($relatedModel->newQuery()->findOrFail($uuids));
 
         $relatedModel->newQuery()->where($foreignKey, $model->id)->update([
             $foreignKey => null,
         ]);
 
-        $relatedModel->newQuery()->whereIn('id', $relatedUuids)->update([
+        $relatedModel->newQuery()->whereIn('id', $uuids)->update([
             $foreignKey => $model->id,
         ]);
 
@@ -77,9 +72,9 @@ class JSONAPIRelationshipService
     }
 
     public function updateManyToManyRelationships(
-        $model, 
-        $relationship, 
-        $uuids
+        Model $model,
+        string $relationship, 
+        array $uuids,
     ): Response {
         $model->$relationship()->sync($uuids);
         return response(null, 204);
